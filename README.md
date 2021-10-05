@@ -1,4 +1,5 @@
 # JS Assessment
+This code is unfinished. You will need to study it to figure out what it does. Then you will need to use this and your own code, to finish the app. 
 
 ## Quiz Application
 
@@ -14,5 +15,4 @@ Complete the following tasks:
 
 5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
 
-The assessment must be completed by 3:30pm. When you have finished, upload your work to GitHub Pages and share the link with your
-pod instructor by DM on Slack.
+The assessment must be completed by 3:30pm. When you have finished, upload your work to GitHub Pages and share the link with your pod instructor by DM on Slack.
