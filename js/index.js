@@ -4,7 +4,7 @@
   
   The tasks you need to do are below.
     TASKS TODO:
-      1. Add 2 more questions to the app (each question must have 4 options). 
+      1. Add 2 more questions to the app (each question must have 4 options). DONE
       2. Calculate the score as the total of the number of correct answers
       3. Add an Event listener for the submit button, which will display the score and highlight the correct answers when the button is clicked. Study the code in the function calculateScore() to help you.
       4. Reload the page when the reset button is clicked (hint: search window.location)
@@ -35,6 +35,16 @@ window.addEventListener("DOMContentLoaded", () => {
       q: "What is the capital of Australia",
       o: ["Sydney", "Canberra", "Melbourne", "Perth"],
       a: 1,
+    },
+    {
+      q: "TestQuestion1",
+      o: ["A", "B", "C", "D"],
+      a: 3,
+    },
+    {
+      q: "TestQuestion2",
+      o: ["A", "B", "C", "D"],
+      a: 2,
     },
   ];
 
@@ -68,15 +78,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if (quizItem.a == i) {
           //change background color of li element here
+          liElement.style.backgroundColor = "green";
         }
 
         if (radioElement.checked) {
-          // code for task 1 goes here
+          // code for task 1 goes here      
+          let selected = radioElement.id.toString()[radioElement.id.length-1];
+          selected == quizItem.a ? score += 1 : false;
         }
       }
-    });
+    })
+    console.log(score);
   };
 
   // call the displayQuiz function
   displayQuiz();
+
+  document.querySelector("#btnSubmit").addEventListener("click", () => calculateScore())
 });
