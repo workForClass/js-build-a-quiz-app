@@ -4,9 +4,9 @@
   
   The tasks you need to do are below.
     TASKS TODO:
-      1. Calculate the score as the total of the number of correct answers
-      2. Add an Event listener for the submit button, which will display the score and highlight the correct answers when the button is clicked. Study the code in the function calculateScore() to help you.
-      3. Add 2 more questions to the app (each question must have 4 options).
+      1. Add 2 more questions to the app (each question must have 4 options). 
+      2. Calculate the score as the total of the number of correct answers
+      3. Add an Event listener for the submit button, which will display the score and highlight the correct answers when the button is clicked. Study the code in the function calculateScore() to help you.
       4. Reload the page when the reset button is clicked (hint: search window.location)
       5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
 *************************** */
