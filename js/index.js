@@ -11,16 +11,24 @@
       5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
 *************************** */
 
-window.addEventListener("DOMContentLoaded", () => {
-  const start = document.querySelector("#start");
-  start.addEventListener("click", function (e) {
-    document.querySelector("#quizBlock").style.display = "block";
-    start.style.display = "none";
-  });
-  // quizArray QUESTIONS & ANSWERS
-  // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
-  // Basic ideas from https://code-boxx.com/simple-javascript-quiz/
-  const quizArray = [
+//window.addEventListener("DOMContentLoaded", () => {
+const start = document.querySelector("#start");
+start.addEventListener("click", function (e) {
+  document.querySelector("#quizBlock").style.display = "block";
+  start.style.display = "none";
+});
+
+// quizArray QUESTIONS & ANSWERS
+// q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
+// Basic ideas from https://code-boxx.com/simple-javascript-quiz/
+//let q = question, o = options, a = correct answer;
+
+start.addEventListener("click", function (e) {
+  document.querySelector("#quizBlock").style.display = "block";
+  start.style.display = "none";
+
+  const quizArray = ["1", "3", "1", "1", "4"];
+  [
     {
       q: "Which is the third planet from the sun?",
       o: ["Saturn", "Earth", "Pluto", "Mars"],
@@ -35,6 +43,21 @@ window.addEventListener("DOMContentLoaded", () => {
       q: "What is the capital of Australia",
       o: ["Sydney", "Canberra", "Melbourne", "Perth"],
       a: 1,
+    },
+    {
+      q: "How old is the Earth",
+      o: [
+        "4.5 Billion Years",
+        "2.1 Billion Years",
+        "13 Billion Years",
+        "6000 Years",
+      ],
+      a: 1, // array index 1 - so  4.5 Billion Years is the correct answer here
+    },
+    {
+      q: "What percent of the Earth is covered with water?",
+      o: ["60%", "80%", "90%", "70%"],
+      a: 4, // array index 4
     },
   ];
 
@@ -57,6 +80,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Calculate the score
   const calculateScore = () => {
+    const scoreDisplay = document.querySelector("#score");
     let score = 0;
     quizArray.map((quizItem, index) => {
       for (let i = 0; i < 4; i++) {
@@ -66,17 +90,54 @@ window.addEventListener("DOMContentLoaded", () => {
         liElement = document.querySelector("#" + li);
         radioElement = document.querySelector("#" + r);
 
-        if (quizItem.a == i) {
+        if (quizItem.q == i) {
           //change background color of li element here
+          liElement.style.backgroundColor = "green";
+          liElement.style.color = "white";
+          liElement.style.fontWeight = "bold";
         }
 
         if (radioElement.checked) {
           // code for task 1 goes here
+          let selected = radioElement.id.toString()[radioElement.id.length - 1];
+          selected == quizItem.a ? (score += 1) : false;
         }
       }
     });
+
+    // Display score
+    let score = 0;
+    const userAnswers = [
+      form.q1.value,
+      form.q2.value,
+      form.q3.value,
+      form.q4.value,
+      form.q5.value,
+    ];
+
+    //check the answers
+    userAnswers.forEach((answer, index) => {
+      if (answer === correctAnswers[index]) {
+        score += 5;
+      }
+    });
+
+    // Stop timer
+    quizTimer(true);
   };
+
+  document.getElementById("start").addEventListener("click", displayQuiz);
 
   // call the displayQuiz function
   displayQuiz();
+
+  // Listener event to calculate score when pressing Submit button
+  document
+    .querySelector("#btnSubmit")
+    .addEventListener("click", () => calculateScore());
+
+  // Reload page when pressing Reset button
+  document.querySelector("#btnReset").addEventListener("click", () => {
+    window.location.reload();
+  });
 });
