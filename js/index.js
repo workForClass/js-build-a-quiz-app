@@ -37,6 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
             if(timeRemaining == 0) {
               timeHeading.innerHTML = "Time is up!";
               timeHeading.style.color = "red";
+              calculateScore();
               clearInterval(countDown);
             }
           }, 1000);
