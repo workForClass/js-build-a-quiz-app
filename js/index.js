@@ -11,7 +11,7 @@
       5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
 *************************** */
 
-window.addEventListener("DOMContentLoaded", () => {
+ window.addEventListener("DOMContentLoaded", () => {
   const start = document.querySelector("#start");
   const submit = document.querySelector("#btnSubmit");
   const quizScore = document.querySelector("#score");
