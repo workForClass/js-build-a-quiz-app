@@ -11,11 +11,43 @@
       5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
 *************************** */
 
+
 window.addEventListener("DOMContentLoaded", () => {
   const start = document.querySelector("#start");
+  
+  // Countdown Timer for Quiz
+  const quizTimer = (submitted) => {
+    let timeHeading = document.querySelector("#time-heading");
+    // Change Timer Display
+         if (submitted) {
+          timeHeading.innerHTML = "Submitted!";
+          timeHeading.style.color = "green";     
+        } else {
+          let timeDisplay = document.querySelector("#time");
+          let timeRemaining = 60;
+          // Update timer every second (by reducing value by 1s)
+          const countDown = setInterval(() => {
+            timeRemaining -= 1;
+            timeDisplay.innerHTML = `${Math.floor(timeRemaining/60)}:${timeRemaining < 10 ? "0"+timeRemaining%60 : timeRemaining%60}`;
+            // Make timer orange when time low
+            if(timeRemaining <= 10) {
+              timeDisplay.style.color = "orange"
+            }
+            // End quiz if timer runs out
+            if(timeRemaining == 0) {
+              timeHeading.innerHTML = "Time is up!";
+              timeHeading.style.color = "red";
+              clearInterval(countDown);
+            }
+          }, 1000);
+        };
+  };
+
   start.addEventListener("click", function (e) {
     document.querySelector("#quizBlock").style.display = "block";
     start.style.display = "none";
+    // Start Quiz Timer when Start button is pressed
+    quizTimer()
   });
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
@@ -32,19 +64,19 @@ window.addEventListener("DOMContentLoaded", () => {
       a: 3,
     },
     {
-      q: "What is the capital of Australia",
+      q: "What is the capital of Australia?",
       o: ["Sydney", "Canberra", "Melbourne", "Perth"],
       a: 1,
     },
     {
-      q: "TestQuestion1",
-      o: ["A", "B", "C", "D"],
-      a: 3,
+      q: "What is the current world population?",
+      o: ["4.7 billion", "840 million", "7.9 billion", "9.2 billion"],
+      a: 2,
     },
     {
-      q: "TestQuestion2",
-      o: ["A", "B", "C", "D"],
-      a: 2,
+      q: "How many beaches does Australia have approx.?",
+      o: ["200-300", "800-2000", "5000-9000", "10000-12000"],
+      a: 3,
     },
   ];
 
@@ -67,6 +99,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Calculate the score
   const calculateScore = () => {
+    const scoreDisplay = document.querySelector("#score")
     let score = 0;
     quizArray.map((quizItem, index) => {
       for (let i = 0; i < 4; i++) {
@@ -87,12 +120,40 @@ window.addEventListener("DOMContentLoaded", () => {
           selected == quizItem.a ? score += 1 : false;
         }
       }
-    })
-    console.log(score);
+    });
+    
+    // Display score
+    if(score < quizArray.length/2) {
+      scoreDisplay.innerHTML = `You scored: ${score}/${quizArray.length}. <span style="color: red">Better luck next time!</span>`;
+    } else if (score > quizArray.length/2 && score != quizArray.length) {
+      scoreDisplay.innerHTML = `You scored: ${score}/${quizArray.length}. <span style="color: orange">Good effort!</span>`;
+    } else {
+      scoreDisplay.innerHTML = `You scored: ${score}/${quizArray.length}. <span style="color: green">Perfect!</span>`;
+    };
+    
+    // Stop timer
+    quizTimer(true);
   };
 
   // call the displayQuiz function
   displayQuiz();
 
-  document.querySelector("#btnSubmit").addEventListener("click", () => calculateScore())
+
+  // Listener event to calculate score when pressing Submit button
+  document.querySelector("#btnSubmit").addEventListener("click", () => calculateScore());
+  
+  // Reload page when pressing Reset button
+  document.querySelector("#btnReset").addEventListener("click", () => {
+    window.location.reload();
+  })
 });
+
+
+
+// create limit var 
+
+// settimeout and decrease limit by 1 every second 
+
+// when limit is 0, return "Time Up" and call submit quiz 
+
+// convert limit to date format
