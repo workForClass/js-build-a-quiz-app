@@ -107,30 +107,36 @@ const calculateScore = () => {
         }
       }
     }
+    //Show Score on Submit//
+     // let scoreElm = document.querySelector("#score");
+      //scoreElm.innerHTML = `your score is ${score}`;
+    const totalScore = document.getElementById("score");
+    totalScore.innerHTML = `Your total score is ${score}`;
+    totalScore.style.color = "blue";
+    
+
   });
   quizScore.innerHTML = "Score = " + score;
   quizScore.style.backgroundColor = "rgb(37, 107, 37)";
   quizScore.style.padding = "5px";
   quizScore.style.color = "#fff";
 
+
   // call the displayQuiz function
   displayQuiz();
 
-  // Add timer
-  //quizTimer(true);
+
 };
 
 // Listener event to start quiz when pressing Start button
 document.getElementById("start").addEventListener("click", displayQuiz);
 
 // Listener event to calculate score when pressing Submit button
-document
-  .querySelector("#btnSubmit")
+document.querySelector("#btnSubmit")
   .addEventListener("click", () => calculateScore());
 
 //Timer Countdown
 timeLeft = 60;
-
 function countdown() {
   timeLeft--;
   document.getElementById("time").innerHTML = String(timeLeft);
@@ -144,4 +150,5 @@ function countdown() {
 // Reload page when pressing Reset button
 document.querySelector("#btnReset").addEventListener("click", () => {
   window.location.reload();
+
 });
