@@ -11,24 +11,21 @@
       5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
 *************************** */
 
-//window.addEventListener("DOMContentLoaded", () => {
-const start = document.querySelector("#start");
-start.addEventListener("click", function (e) {
-  document.querySelector("#quizBlock").style.display = "block";
-  start.style.display = "none";
-});
+window.addEventListener("DOMContentLoaded", () => {
+  const start = document.querySelector("#start");
+    // start.addEventListener("click", function (e) {
+    //document.querySelector("#quizBlock").style.display = "block";
+    //start.style.display = "none";
+  });
+  document.getElementById("start").addEventListener("click", displayQuiz());
 
 // quizArray QUESTIONS & ANSWERS
 // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
 // Basic ideas from https://code-boxx.com/simple-javascript-quiz/
 //let q = question, o = options, a = correct answer;
 
-start.addEventListener("click", function (e) {
-  document.querySelector("#quizBlock").style.display = "block";
-  start.style.display = "none";
 
-  const quizArray = ["1", "3", "1", "1", "4"];
-  [
+  const quizArray =  [
     {
       q: "Which is the third planet from the sun?",
       o: ["Saturn", "Earth", "Pluto", "Mars"],
@@ -62,7 +59,7 @@ start.addEventListener("click", function (e) {
   ];
 
   // function to Display the quiz questions and answers from the object
-  const displayQuiz = () => {
+    const displayQuiz = () => {
     const quizWrap = document.querySelector("#quizWrap");
     let quizDisplay = "";
     quizArray.map((quizItem, index) => {
@@ -132,12 +129,10 @@ start.addEventListener("click", function (e) {
   displayQuiz();
 
   // Listener event to calculate score when pressing Submit button
-  document
-    .querySelector("#btnSubmit")
-    .addEventListener("click", () => calculateScore());
+  document.querySelector("#btnSubmit").addEventListener("click", () => calculateScore());
 
   // Reload page when pressing Reset button
   document.querySelector("#btnReset").addEventListener("click", () => {
     window.location.reload();
   });
-});
+
